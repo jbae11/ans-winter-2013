@@ -5,10 +5,10 @@ latexopt   = -halt-on-error -file-line-error
 all: all-via-dvi
 
 all-via-pdf: $(manuscript).tex $(references).bib
-	pdflatex $(latexopt) $<
+	pdflatex $(latexopt) $(manuscript)
 	bibtex $(manuscript $<).aux
-	pdflatex $(latexopt) $<
-	pdflatex $(latexopt) $<
+	pdflatex $(latexopt) $(manuscript)
+	pdflatex $(latexopt) $(manuscript)
 
 all-via-dvi: 
 	latex $(latexopt) $(manuscript)
