@@ -60,7 +60,7 @@
 
 % Insert authors' names and short version of title in lines below
 %
-\authorHead{Anthony M. Scopatz}
+\authorHead{Scopatz, et al.}
 \shortTitle{PyNE Progress Report}
 
 \confTitle{PyNE Progress Report}
@@ -77,9 +77,10 @@
 \title{PyNE Progress Report}
 
 \author{Anthony Scopatz\superscript{A}, Elliott D. Biondo\superscript{A}, 
-        Carsten Brachem\superscript{B}, John Xia\superscript{C}}
+        Carsten Brachem\superscript{B}, John Xia\superscript{C}, 
+        Paul P. H. Wilson\superscript{A}}
 \affil{\textbf{A:} The University of Wisconsin-Madison, 
-       \textbf{B:} Technische Universit\"at Dresden,
+       \textbf{B:} Technische Universit\"at Dresden,\\
        \textbf{C:} The University of Chicago\\
        scopatz@wisc.edu}
 
@@ -91,7 +92,7 @@
 \emph{Key Words}: PyNE, MCNP, ENDF
 \end{abstract}
 
-\setlength{\baselineskip}{12pt}
+\setlength{\baselineskip}{11pt}
 
 
 \section{Enhanced Capabilities}
@@ -116,7 +117,6 @@ class stores collections of materials with along with corresponding mass or
 volume fraction.  Class methods allow for mixing of these collections by mass
 or volume fraction in order to create \texttt{ Material} objects.
 
-
 \subsection{MCNP Support}
 
 Two classes have been added to the \texttt{pyne.mcnp} module in order to store
@@ -124,6 +124,16 @@ MCNP data on Mesh Oriented datABase (MOAB) meshes \cite{tautges_moab:_2004}.
 Storing data on MOAB meshes has numerous benefits including access to preexisting
 mesh and data manipulation capabilities and easy visualization options. These
 meshes are created using PyTAPS \cite{pytaps}, the Python interface to MOAB.
+As an example of MOAB mesh visulaization may be seen in Figure \ref{moabexp}.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.3]{moab_example.eps}
+\end{center}
+\caption{A MOAB mesh which displays the neutron mesh tally results from a U-shaped 
+         duct streaming problem with a 14 MeV isotropic neutron source.}
+\label{moabexp}
+\end{figure}
 
 The \texttt{pyne.mcnp.Wwinp} class stores all of the information contained in a
 single Cartesian MCNP WWINP file which contains a set of weight window lower
@@ -256,6 +266,11 @@ xs_data = u235.get_xs(922350, 16)[0]
 \caption{U-235 (n, 2n) Cross Section from ENDF Evaluation}
 \label{u235}
 \end{figure}
+
+\section{Conclusion \& Future Work}
+\label{sec:conc}
+
+The 
 
 \bibliographystyle{ans}
 \bibliography{refs}
