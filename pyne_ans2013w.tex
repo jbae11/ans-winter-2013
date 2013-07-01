@@ -160,6 +160,15 @@ to a file in the well-known HDF5 format \cite{hdf5}.
 
 \subsection{ENDF Reader Support}
 
+A significant improvement to the PyNE toolkit has been the developement of 
+a fully fledged ENDF \cite{mclane2001endf} reader.  This parser is capable 
+of handling all ENDF files and evaluations. The perfomrance of the reader is 
+extrodinarily fast due to a number of inovative optimizations that.
+
+At the top-most level a \texttt{Library} class is defined in the \texttt{pyne.endf}
+module.  This module is itself written in the Cython language \cite{behnel2010cython}.
+The Cython interpreter itself acts as a code-generation and optimization pass.
+
 \section{Major Refactorizations}
 
 
