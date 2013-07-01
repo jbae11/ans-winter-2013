@@ -164,11 +164,53 @@ extrodinarily fast due to a number of inovative optimizations that.
 
 At the top-most level a \texttt{Library} class is defined in the \texttt{pyne.endf}
 module.  This module is itself written in the Cython language \cite{behnel2010cython}.
-The Cython interpreter itself acts as a code-generation and optimization pass.
+The Cython interpreter itself acts as a code-generation and optimization pass where
+Python code becomes non-idomatic C/C++.  Furthermore this reader implements a
+`lazy' strategy whereby data sets are only loaded into memory upon request rather 
+than upon initialization.  This enables evaluations in a single physical file to be 
+read independently.  This is a huge usability boon to interactive exploration of 
+cross section data and decsreases application start up times.
+
+However, the most ubiquitous speed up is in terms of converting the string
+data values in the file to machine floats.  The data values stored in ENDF 
+are not in an encoding compliant with
+most modern programming languages float literals. Thus the built-in tools do not 
+handle ENDF-type floats out natively.  However, the ENDF format does have a couple
+of advantages.  It elides the `e' separator between the exponent and mantissa and
+relies on the `+' and `-' characters.  This reduces the overall storage size.
+Furthermore, the string literal is a fixed 11 characters long. The first character
+is always a `+' or `-' or space.  The third character is always the floating point.
+There are only two exponent characters and all other characters are digits.  
+For example, \texttt{``-3.28559+12"}.
+
+The predictability of this format allows for several optimizations.  A na\"{i}ve 
+implementation would simply add the missing exponent `e' character to create
+a standards compliant float string and calling the \texttt{atof()} function.  
+However, this does not levarage the known width of ENDF or the known position of
+the non-digit characters.  Hence a C++ function named \texttt{endftod()} was 
+created which takes advantage of this \emph{a priori} knowledge.  Table \ref{endftod}
+shows the average comparative runtimes. The custom method is nearly 
+5 times faster on the most-called routine when parsing ENDF files.
+
+\begin{table}
+\caption{ENDF Float Conversion Comparison}
+\label{endftod}
+\begin{center}
+\begin{tabular}[htbp]{|l|c|c|}
+\hline
+\textbf{Implementation} & \textbf{Average Run Time [ns]} & \textbf{Speed Up} \\
+\hline
+Na\"{i}ve Python, \texttt{float()} & 539 & 1.0 \\
+\hline
+Na\"{i}ve C, \texttt{atof()} & 229 & 2.3 \\
+\hline
+PyNE, \texttt{endftod()} & 114 & 4.7 \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
 
 \section{Major Refactorizations}
-
-
 
 \bibliographystyle{ans}
 \bibliography{refs}
