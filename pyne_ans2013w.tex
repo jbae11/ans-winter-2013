@@ -93,52 +93,52 @@
 
 \subsection{Material Handling}
 
-Improvements to material handling have been added to the \verb|pyne.material|
-and \verb|pyne.mcnp| modules. A new attribute was added to the
-\verb|pyne.material.Material| class in order to store material metadata (e.g.
+Improvements to material handling have been added to the \texttt{pyne.material}
+and \texttt{pyne.mcnp} modules. A new attribute was added to the
+\texttt{pyne.material.Material} class in order to store material metadata (e.g.
 material name, the source of the material definition, comments).
-\verb|Material| class methods were added to write material definitions in MCNP
+\texttt{Material} class methods were added to write material definitions in MCNP
 and ALARA \cite{wilson_alara:_1999} input file formats.  These materials
 definitions are prepended by comments containing the aforementioned metadata. 
 
-In addition, a function was added to \verb|pyne.mcnp| to read MCNP input files and
-create \verb|Material| objects for each material specified in the file. This
+In addition, a function was added to \texttt{pyne.mcnp} to read MCNP input files and
+create \texttt{Material} objects for each material specified in the file. This
 function can parse formatted comments in MCNP input files in order to
-populate the metadata fields of each \verb|Material| object.
+populate the metadata fields of each \texttt{Material} object.
 
-Finally, a new class, \verb|pyne.material.MultiMaterial|, was added.  This
+Finally, a new class, \texttt{pyne.material.MultiMaterial}, was added.  This
 class stores collections of materials with along with corresponding mass or
 volume fraction.  Class methods allow for mixing of these collections by mass
-or volume fraction in order to create \verb| Material| objects.
+or volume fraction in order to create \texttt{ Material} objects.
 
 
-\subsection{MCNP5 Support}
+\subsection{MCNP Support}
 
-Two classes have been added to the \verb|pyne.mcnp| module in order to store
+Two classes have been added to the \texttt{pyne.mcnp} module in order to store
 MCNP data on Mesh Oriented datABase (MOAB) meshes \cite{tautges_moab:_2004}.
 Storing data on MOAB meshes has numerous benefits including access to preexisting
 mesh and data manipulation capabilities and easy visualization options. These
 meshes are created using PyTAPS \cite{pytaps}, the Python interface to MOAB.
 
-The \verb|pyne.mcnp.Wwinp| class stores all of the information contained in a
-single Cartesian MCNP5 WWINP file which contains a set of weight window lower
+The \texttt{pyne.mcnp.Wwinp} class stores all of the information contained in a
+single Cartesian MCNP WWINP file which contains a set of weight window lower
 bounds for neutrons, photons, or both. The weight window lower bounds are
 stored on a structured MOAB mesh attribute. In addition to class methods that
-read-in and write-out MCNP WWINP files, \verb|Wwinp| objects can be created
+read-in and write-out MCNP WWINP files, \texttt{Wwinp} objects can be created
 directly from MOAB meshes tagged with weight window lower bounds. This will
 facilitate the future implementation of weight window generation schemes (e.g.
 MAGIC \cite{davis_comparison_2011}, CADIS \cite{haghighat_monte_2003}) within
 PyNE.
 
-The \verb|pyne.mcnp.Meshtal| class stores all the information from a Cartesian
-MCNP5 MESHTAL file. These files may contain multiple neutron and/or photon mesh
+The \texttt{pyne.mcnp.Meshtal} class stores all the information from a Cartesian
+MCNP MESHTAL file. These files may contain multiple neutron and/or photon mesh
 tallies.  Tally results and relative errors are stored on structured MOAB
 meshes. A dictionary attribute allows key-value access to these meshes using
 tally numbers (i.e. 4, 14, 24, ...) as keys. Other methods allow for for the
 addition and subtraction of tally values for different mesh tallies.
 
 Another addition to PyNE's MCNP capabilities is the ability to read and
-process particle track (PTRAC) files. The \verb|PTRAC| card allows MCNP
+process particle track (PTRAC) files. The \texttt{PTRAC} card allows MCNP
 users to record complete particle histories for selected events. However,
 the custom binary file format used to save the particle tracks is cumbersome
 to work with and varies in details, depending on system architecture or
@@ -147,7 +147,7 @@ tracks is unfeasible due to the large size of the generated files and the
 poor speed associated with processing plaintext files. Therefore, only
 binary PTRAC files are supported by PyNE at this moment.
 
-The \verb|pyne.mcnp.PtracReader| class takes care of all the details
+The \texttt{pyne.mcnp.PtracReader} class takes care of all the details
 involved in reading particle track files and offers a simple interface
 for reading event information and metadata associated with the run.
 It also has a built-in function to write the particle tracks directly
