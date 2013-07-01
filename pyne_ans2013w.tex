@@ -31,6 +31,7 @@
 \usepackage{graphicx}
 \usepackage{tabls}
 \usepackage{hyperref}
+\usepackage{listings}
 %
 
 %General Short-Cut Commands
@@ -75,8 +76,9 @@
 \title{PyNE Progress Report}
 
 \author{Anthony Scopatz\superscript{A}, Elliott D. Biondo\superscript{A}, 
-        John Xia\superscript{C}}
+        Carsten Brachem\superscript{B}, John Xia\superscript{C}}
 \affil{\textbf{A:} The University of Wisconsin-Madison, 
+       \textbf{B:} Technische Universit\"at Dresden,
        \textbf{C:} The University of Chicago\\
        scopatz@wisc.edu}
 
@@ -154,6 +156,34 @@ involved in reading particle track files and offers a simple interface
 for reading event information and metadata associated with the run.
 It also has a built-in function to write the particle tracks directly
 to a file in the well-known HDF5 format \cite{hdf5}.
+A small command line utility program called \verb|ptrac_to_hdf5| is
+provided to make converting PTRAC files as convenient as possible
+for the common use case. Figure \ref{fig_ptractohdf5} shows the usage
+description of the conversion program.
+
+\begin{figure}
+\begin{lstlisting}[frame=single,basicstyle=\scriptsize]
+usage: ptrac_to_hdf5 [-h] [-n TABLE_NAME] [-t TABLE_TITLE] [-s]
+                     ptrac_file hdf5_file
+
+write the contents of a MCNP PTRAC file to a HDF5 table
+
+positional arguments:
+  ptrac_file            MCNP PTRAC file to read from
+  hdf5_file             HDF5 file to write to (will be created if it does not
+                        exist)
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -n TABLE_NAME, --table-name TABLE_NAME
+                        name of the HDF5 table (default is "ptrac")
+  -t TABLE_TITLE, --table-title TABLE_TITLE
+                        title of the HDF5 table (default is "Ptrac data")
+  -s, --show-progress   show progress indicator
+\end{lstlisting}
+\caption{Usage description of the PTRAC to HDF5 command line utility.}
+\label{fig_ptractohdf5}
+\end{figure}
 
 \subsection{ENDF Reader Support}
 
