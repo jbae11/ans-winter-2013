@@ -61,7 +61,7 @@
 \authorHead{Anthony M. Scopatz}
 \shortTitle{PyNE: A Working Title}
 
-\confTitle{PyNE: A Working Titl}
+\confTitle{PyNE: A Working Title}
 \confLocation{Washington D.C., Nov. 11-14, 2013}
 \confPublished{on CD-ROM (2013)}
 
@@ -72,7 +72,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
-\title{PyNE: A Working Titl}
+\title{PyNE: A Working Title}
 
 \author{Anthony Scopatz}
 \affil{The University of Wisconsin-Madison\\
@@ -136,6 +136,22 @@ tallies.  Tally results and relative errors are stored on structured MOAB
 meshes. A dictionary attribute allows key-value access to these meshes using
 tally numbers (i.e. 4, 14, 24, ...) as keys. Other methods allow for for the
 addition and subtraction of tally values for different mesh tallies.
+
+Another addition to PyNE's MCNP capabilities is the ability to read and
+process particle track (PTRAC) files. The \verb|PTRAC| card allows MCNP
+users to record complete particle histories for selected events. However,
+the custom binary file format used to save the particle tracks is cumbersome
+to work with and varies in details, depending on system architecture or
+how MCNP was compiled. The available plaintext format for particle
+tracks is unfeasible due to the large size of the generated files and the
+poor speed associated with processing plaintext files. Therefore, only
+binary PTRAC files are supported by PyNE at this moment.
+
+The \verb|pyne.mcnp.PtracReader| class takes care of all the details
+involved in reading particle track files and offers a simple interface
+for reading event information and metadata associated with the run.
+It also has a built-in function to write the particle tracks directly
+to a file in the well-known HDF5 format \cite{hdf5}.
 
 \bibliographystyle{ans}
 \bibliography{refs}
