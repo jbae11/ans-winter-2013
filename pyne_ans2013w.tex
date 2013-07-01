@@ -183,7 +183,7 @@ relies on the `+' and `-' characters.  This reduces the overall storage size.
 Furthermore, the string literal is a fixed 11 characters long. The first character
 is always a `+' or `-' or space.  The third character is always the floating point.
 There are only two exponent characters and all other characters are digits.  
-For example, \texttt{``-3.28559+12"}.
+For example, ``\texttt{-3.28559+12}" is a valid number in the ENDF format.
 
 The predictability of this format allows for several optimizations.  A na\"{i}ve 
 implementation would simply add the missing exponent `e' character to create
