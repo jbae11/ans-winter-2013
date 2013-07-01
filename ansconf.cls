@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{ansconf}[2012/09/21]
 
-\LoadClass[11pt,twoside]{article}
+\LoadClass[11pt,twoside,twocolumn]{article}
 \typeout{Loading ANS conference document class: includes [11pt,twoside]{article}}
 \typeout{adapted by Paul K. Romano from R.C. Martineau at INL, from A. Sood at
   LANL, from J. Wagner (ORNL) who obtained the original class file by Jim Warsa,
@@ -59,7 +59,7 @@
 \fancyhead[CE]{{\scriptsize \@authorHead}}
 \fancyhead[CO]{{\scriptsize \@shortTitle}}
 \lfoot{\scriptsize{\@confTitle, \\ \@confLocation.}}
-\rfoot{\thepage/\pageref{LastPage}}
+%\rfoot{\thepage/\pageref{LastPage}}
 \pagestyle{fancy}
 
 % Header/footer for first page
@@ -125,4 +125,4 @@
 \RequirePackage[style]{abstract}
 \renewcommand{\abstitlestyle}[1]{\bfseries\centering\MakeUppercase#1}
 
-\AtBeginDocument{\raggedright}
+%\AtBeginDocument{\raggedright}

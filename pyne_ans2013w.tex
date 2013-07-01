@@ -79,15 +79,15 @@
 \author{Anthony Scopatz\superscript{A}, Elliott D. Biondo\superscript{A}, 
         Carsten Brachem\superscript{B}, John Xia\superscript{C}, 
         Paul P. H. Wilson\superscript{A}}
-\affil{\textbf{A:} The University of Wisconsin-Madison, 
-       \textbf{B:} Technische Universit\"at Dresden,\\
-       \textbf{C:} The University of Chicago\\
-       scopatz@wisc.edu}
+\affil{\textbf{A:} The University of Wisconsin-Madison, 1415 Engineering Drive, Madison, WI 53706, USA \\
+       \textbf{B:} Technische Universit\"at Dresden, Helmholtzstr. 10 01069 Dresden, Germany\\
+       \textbf{C:} The University of Chicago, 5747 S. Ellis Ave, Jones 311, Chicago, IL  60637\\
+       \emph{email:} scopatz@wisc.edu}
 
 \maketitle
 
 \begin{abstract}
-\raggedright
+%\raggedright
 
 PyNE, the nuclear engineering toolkit, has recently received several major
 feature additions.  These include support for reading and writing PyNE materials 
@@ -144,10 +144,11 @@ Storing data on MOAB meshes has numerous benefits including access to preexistin
 mesh and data manipulation capabilities and easy visualization options. These
 meshes are created using PyTAPS \cite{pytaps}, the Python interface to MOAB.
 As an example of MOAB mesh visualization may be seen in Figure \ref{moabexp}.
+This visualization was produced with the yt analysis package \cite{ytpaper}.
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[scale=0.3]{moab_example.eps}
+\includegraphics[scale=0.35]{moab_example.eps}
 \end{center}
 \caption{A MOAB mesh which displays the neutron mesh tally results from a U-shaped 
          duct streaming problem with a 14 MeV isotropic neutron source.}
@@ -192,6 +193,7 @@ provided to make converting PTRAC files as convenient as possible
 for the common use case. Listing \ref{fig_ptractohdf5} shows the usage
 description of the conversion program.
 
+\begin{figure*}[htbp]
 \begin{lstlisting}[frame=single,basicstyle=\scriptsize,label=fig_ptractohdf5,caption=Usage description of the PTRAC to HDF5 command line utility.]
 usage: ptrac_to_hdf5 [-h] [-n TABLE_NAME] [-t TABLE_TITLE] [-s] ptrac_file hdf5_file
 
@@ -209,6 +211,7 @@ optional arguments:
                         title of the HDF5 table (default is "Ptrac data")
   -s, --show-progress   show progress indicator
 \end{lstlisting}
+\end{figure*}
 
 \subsection{ENDF Reader Support}
 
@@ -247,13 +250,7 @@ created which takes advantage of this \emph{a priori} information.
 Table \ref{endftod} compares the average runtimes. The custom algorithm is nearly 
 five times faster on the most-called routine when parsing ENDF files.
 
-As an example of the ENDF reader usage, the following code in Listing \ref{endfapi} 
-displays the top-level interface required to load a data set.  Figure \ref{u235} 
-then displays the data garnered in this way.  This reader has also
-been exposed as a cross section data source available in the \texttt{pyne.xs} 
-sub-package.
-
-\begin{table}
+\begin{table*}
 \caption{ENDF Float Conversion Comparison}
 \label{endftod}
 \begin{center}
@@ -269,8 +266,7 @@ PyNE, \texttt{endftod()} & 114 & 4.7 \\
 \hline
 \end{tabular}
 \end{center}
-\end{table}
-
+\end{table*}
 
 \begin{lstlisting}[language=Python,basicstyle=\scriptsize,frame=single,caption=ENDF Reader API,label=endfapi]
 from pyne.endf import Library
@@ -278,13 +274,20 @@ u235 = Library("U235-VII.txt")
 xs_data = u235.get_xs(922350, 16)[0]
 \end{lstlisting}
 
-\begin{figure}[htbp]
+\begin{figure*}[htbp]
 \begin{center}
-\includegraphics[scale=0.5]{u235_2n.eps}
+\includegraphics[scale=1.0]{u235_2n.eps}
 \end{center}
 \caption{U-235 (n, 2n) Cross Section from ENDF Evaluation}
 \label{u235}
-\end{figure}
+\end{figure*}
+
+As an example of the ENDF reader usage, the following code in Listing \ref{endfapi} 
+displays the top-level interface required to load a data set.  Figure \ref{u235} 
+then displays the data garnered in this way.  This reader has also
+been exposed as a cross section data source available in the \texttt{pyne.xs} 
+sub-package.
+
 
 \section{Conclusions \& Future Work}
 \label{sec:conc}
