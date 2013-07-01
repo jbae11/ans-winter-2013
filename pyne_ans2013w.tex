@@ -92,7 +92,7 @@
 PyNE, the nuclear engineering toolkit, has recently received several major
 feature additions.  These include support for reading and writing PyNE materials 
 as ALARA materials.  Additionally, MOAB has been selected as the PyNE mesh package
-and MCNP MESHTAL file handlers are available.  Furthermore, MCNP PTRAC files may now
+and MCNP WWINP and MESHTAL file handlers are available.  Furthermore, MCNP PTRAC files may now
 easily be converted to an HDF5 file.  Lastly, an ENDF reader has been written and 
 optimized.
 
@@ -170,7 +170,7 @@ Cartesian MCNP MESHTAL file. These files may contain multiple neutron and/or
 photon mesh
 tallies.  Tally results and relative errors are stored on structured MOAB
 meshes. A dictionary attribute allows key-value access to these meshes using
-tally numbers (i.e. 4, 14, 24, ...) as keys. Other methods allow for for the
+tally numbers (i.e. 4, 14, 24, ...) as keys. Other methods allow for the
 addition and subtraction of tally values for different mesh tallies.
 
 Another addition to PyNE's MCNP capabilities is the ability to read and
