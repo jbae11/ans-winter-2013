@@ -89,7 +89,7 @@
 \begin{abstract}
 \raggedright
 
-PyNE, the nuclear engineering toolkit, has recently recieved several major
+PyNE, the nuclear engineering toolkit, has recently received several major
 feature additions.  These include support for reading and writing PyNE materials 
 as ALARA materials.  Additionally, MOAB has been selected as the PyNE mesh package
 and MCNP MESHTAL file handlers are available.  Furthermore, MCNP PTRAC files may now
@@ -131,8 +131,8 @@ create \texttt{Material} objects for each material specified in the file. This
 function can parse formatted comments in MCNP input files in order to
 populate the metadata fields of each \texttt{Material} object.
 
-Finally, a new class, \texttt{pyne.material.MultiMaterial}, was added.  This
-class stores collections of materials with along with corresponding mass or
+Moreover a new class called \texttt{pyne.material.MultiMaterial} was added.  This
+represents collections of materials with along with corresponding mass or
 volume fraction.  Class methods allow for mixing of these collections by mass
 or volume fraction in order to create \texttt{ Material} objects.
 
@@ -143,7 +143,7 @@ MCNP data on Mesh Oriented datABase (MOAB) meshes \cite{tautges_moab:_2004}.
 Storing data on MOAB meshes has numerous benefits including access to preexisting
 mesh and data manipulation capabilities and easy visualization options. These
 meshes are created using PyTAPS \cite{pytaps}, the Python interface to MOAB.
-As an example of MOAB mesh visulaization may be seen in Figure \ref{moabexp}.
+As an example of MOAB mesh visualization may be seen in Figure \ref{moabexp}.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -154,8 +154,8 @@ As an example of MOAB mesh visulaization may be seen in Figure \ref{moabexp}.
 \label{moabexp}
 \end{figure}
 
-The \texttt{pyne.mcnp.Wwinp} class stores all of the information contained in a
-single Cartesian MCNP WWINP file which contains a set of weight window lower
+First, the \texttt{pyne.mcnp.Wwinp} class represents all information contained in a
+single Cartesian MCNP WWINP file.   Such files contain a set of weight window lower
 bounds for neutrons, photons, or both. The weight window lower bounds are
 stored on a structured MOAB mesh attribute. In addition to class methods that
 read-in and write-out MCNP WWINP files, \texttt{Wwinp} objects can be created
@@ -164,8 +164,9 @@ facilitate the future implementation of weight window generation schemes (e.g.
 MAGIC \cite{davis_comparison_2011}, CADIS \cite{haghighat_monte_2003}) within
 PyNE.
 
-The \texttt{pyne.mcnp.Meshtal} class stores all the information from a Cartesian
-MCNP MESHTAL file. These files may contain multiple neutron and/or photon mesh
+Next, the \texttt{pyne.mcnp.Meshtal} class represents the information from a 
+Cartesian MCNP MESHTAL file. These files may contain multiple neutron and/or 
+photon mesh
 tallies.  Tally results and relative errors are stored on structured MOAB
 meshes. A dictionary attribute allows key-value access to these meshes using
 tally numbers (i.e. 4, 14, 24, ...) as keys. Other methods allow for for the
@@ -176,9 +177,9 @@ process particle track (PTRAC) files. The \texttt{PTRAC} card allows MCNP
 users to record complete particle histories for selected events. However,
 the custom binary file format used to save the particle tracks is cumbersome
 to work with and varies in details, depending on system architecture or
-how MCNP was compiled. The available plaintext format for particle
+how MCNP was compiled. The available plain text format for particle
 tracks is unfeasible due to the large size of the generated files and the
-poor speed associated with processing plaintext files. Therefore, only
+poor speed associated with processing plain text files. Therefore, only
 binary PTRAC files are supported by PyNE at this moment.
 
 The \texttt{pyne.mcnp.PtracReader} class takes care of all the details
@@ -186,21 +187,19 @@ involved in reading particle track files and offers a simple interface
 for reading event information and metadata associated with the run.
 It also has a built-in function to write the particle tracks directly
 to a file in the well-known HDF5 format \cite{hdf5}.
-A small command line utility program called \verb|ptrac_to_hdf5| is
+A small command line utility program called \texttt{ptrac\_to\_hdf5} is
 provided to make converting PTRAC files as convenient as possible
-for the common use case. Figure \ref{fig_ptractohdf5} shows the usage
+for the common use case. Listing \ref{fig_ptractohdf5} shows the usage
 description of the conversion program.
 
 \begin{lstlisting}[frame=single,basicstyle=\scriptsize,label=fig_ptractohdf5,caption=Usage description of the PTRAC to HDF5 command line utility.]
-usage: ptrac_to_hdf5 [-h] [-n TABLE_NAME] [-t TABLE_TITLE] [-s]
-                     ptrac_file hdf5_file
+usage: ptrac_to_hdf5 [-h] [-n TABLE_NAME] [-t TABLE_TITLE] [-s] ptrac_file hdf5_file
 
 write the contents of a MCNP PTRAC file to a HDF5 table
 
 positional arguments:
   ptrac_file            MCNP PTRAC file to read from
-  hdf5_file             HDF5 file to write to (will be created if it does not
-                        exist)
+  hdf5_file             HDF5 file to write to (will be created if it does not exist)
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -213,45 +212,45 @@ optional arguments:
 
 \subsection{ENDF Reader Support}
 
-A significant improvement to the PyNE toolkit has been the developement of 
+A significant improvement to the PyNE toolkit has been the development of 
 a fully fledged ENDF \cite{mclane2001endf} reader.  This parser is capable 
-of handling all ENDF files and evaluations. The perfomrance of the reader is 
-extrodinarily fast due to a number of inovative optimizations that.
+of handling all ENDF files and evaluations. The performance of the reader is 
+extraordinarily fast due to a number of innovative optimizations.
 
 At the top-most level a \texttt{Library} class is defined in the \texttt{pyne.endf}
 module.  This module is itself written in the Cython language \cite{behnel2010cython}.
-The Cython compiler itself acts as a code-generation and optimization pass where
+The Cython compiler itself acts as a code-generation and optimization pass whereby
 Python code becomes non-idomatic C/C++.  Furthermore this reader implements a
-`lazy' strategy whereby data sets are only loaded into memory upon request rather 
+`lazy' strategy that only loads data sets into memory upon request rather 
 than upon initialization.  This enables evaluations in a single physical file to be 
 read independently.  This is a huge usability boon to interactive exploration of 
-cross section data and decsreases application start up times.
+cross section data and decreases application start up times.
 
 However, the most ubiquitous speed up is in terms of converting the string
 data values in the file to machine floats.  The data values stored in ENDF 
 are not in an encoding compliant with
 most modern programming languages float literals. Thus the built-in tools do not 
-handle ENDF-type floats out natively.  However, the ENDF format does have a couple
+handle ENDF-type floats natively.  However, the ENDF format does have a couple
 of advantages.  It elides the `e' separator between the exponent and mantissa and
 relies on the `+' and `-' characters.  This reduces the overall storage size.
 Furthermore, the string literal is a fixed 11 characters long. The first character
 is always a `+' or `-' or space.  The third character is always the floating point.
-There are only two exponent characters and all other characters are digits.  
+There are only two exponent characters. All other characters are digits.  
 For example, ``\texttt{-3.28559+12}" is a valid number in the ENDF format.
 
 The predictability of this format allows for several optimizations.  A na\"{i}ve 
 implementation would simply add the missing exponent `e' character to create
-a standards compliant float string and calling the \texttt{atof()} function.  
-However, this does not levarage the known width of ENDF or the known position of
+a standards compliant float string and then call the \texttt{atof()} function.  
+However, this does not leverage the known width of ENDF or the known position of
 the non-digit characters.  Hence a C++ function named \texttt{endftod()} was 
-created which takes advantage of this \emph{a priori} knowledge.  Table \ref{endftod}
-shows the average comparative runtimes. The custom method is nearly 
+created which takes advantage of this \emph{a priori} information.  
+Table \ref{endftod} compares the average runtimes. The custom algorithm is nearly 
 five times faster on the most-called routine when parsing ENDF files.
 
-As an example of the ENDF readee usage, the following code in Listing \ref{endfapi} 
+As an example of the ENDF reader usage, the following code in Listing \ref{endfapi} 
 displays the top-level interface required to load a data set.  Figure \ref{u235} 
-following this displays the data garnered in this way.  This reader has also
-been exposed as a cross section data source available in \texttt{pyne.xs} 
+then displays the data garnered in this way.  This reader has also
+been exposed as a cross section data source available in the \texttt{pyne.xs} 
 sub-package.
 
 \begin{table}
@@ -287,10 +286,11 @@ xs_data = u235.get_xs(922350, 16)[0]
 \label{u235}
 \end{figure}
 
-\section{Conclusion \& Future Work}
+\section{Conclusions \& Future Work}
 \label{sec:conc}
 
-The devlopment of PyNE presented above demonstrates major acomplishments with respect
+The building of the PyNE-based tools presented above demonstrates major 
+accomplishments with respect
 to interfacing with external tools.  Both ENDF and MCNP are keystones of 
 nuclear engineering software development.  The PyNE project will continue to create 
 free and open source tools that easily interface the plethora of choices available 
