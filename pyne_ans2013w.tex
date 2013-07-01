@@ -89,11 +89,30 @@
 \begin{abstract}
 \raggedright
 
+PyNE, the nuclear engineering toolkit, has recently recieved several major
+feature additions.  These include support for reading and writing PyNE materials 
+as ALARA materials.  Additionally, MOAB has been selected as the PyNE mesh package
+and MCNP MESHTAL file handlers are available.  Furthermore, MCNP PTRAC files may now
+easily be converted to an HDF5 file.  Lastly, an ENDF reader has been written and 
+optimized.
+
 \emph{Key Words}: PyNE, MCNP, ENDF
 \end{abstract}
 
 \setlength{\baselineskip}{11pt}
 
+
+\section{Introduction}
+\label{sec:intro}
+
+PyNE is a suite of free and open source (BSD licensed) tools to aid in 
+computational nuclear science \& engineering. PyNE seeks to provide native 
+implementations of common nuclear algorithms, as well as Python bindings and 
+I/O support for industry standard nuclear codes.  In recent months, the development 
+of PyNE has largely focused on feature 
+enhancements for external tools.  These additions include interfacing with 
+codes such as ALARA, MCNP, MOAB as well as the ENDF cross section data
+file format format.
 
 \section{Enhanced Capabilities}
 
@@ -229,6 +248,12 @@ created which takes advantage of this \emph{a priori} knowledge.  Table \ref{end
 shows the average comparative runtimes. The custom method is nearly 
 five times faster on the most-called routine when parsing ENDF files.
 
+As an example of the ENDF readee usage, the following code in Listing \ref{endfapi} 
+displays the top-level interface required to load a data set.  Figure \ref{u235} 
+following this displays the data garnered in this way.  This reader has also
+been exposed as a cross section data source available in \texttt{pyne.xs} 
+sub-package.
+
 \begin{table}
 \caption{ENDF Float Conversion Comparison}
 \label{endftod}
@@ -247,11 +272,6 @@ PyNE, \texttt{endftod()} & 114 & 4.7 \\
 \end{center}
 \end{table}
 
-As an example of the ENDF readee usage, the following code in Listing \ref{endfapi} 
-displays the top-level interface required to load a data set.  Figure \ref{u235} 
-following this displays the data garnered in this way.  This reader has also
-been exposed as a cross section data source available in \texttt{pyne.xs} 
-sub-package.
 
 \begin{lstlisting}[language=Python,basicstyle=\scriptsize,frame=single,caption=ENDF Reader API,label=endfapi]
 from pyne.endf import Library
@@ -261,7 +281,7 @@ xs_data = u235.get_xs(922350, 16)[0]
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{u235_2n.eps}
+\includegraphics[scale=0.5]{u235_2n.eps}
 \end{center}
 \caption{U-235 (n, 2n) Cross Section from ENDF Evaluation}
 \label{u235}
@@ -270,7 +290,11 @@ xs_data = u235.get_xs(922350, 16)[0]
 \section{Conclusion \& Future Work}
 \label{sec:conc}
 
-The 
+The devlopment of PyNE presented above demonstrates major acomplishments with respect
+to interfacing with external tools.  Both ENDF and MCNP are keystones of 
+nuclear engineering software development.  The PyNE project will continue to create 
+free and open source tools that easily interface the plethora of choices available 
+in nuclear engineering and scientific computing. 
 
 \bibliographystyle{ans}
 \bibliography{refs}
