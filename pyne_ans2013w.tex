@@ -123,7 +123,7 @@ and \texttt{pyne.mcnp} modules. A new attribute was added to the
 \texttt{pyne.material.Material} class in order to store material metadata (e.g.
 material name, the source of the material definition, comments).
 \texttt{Material} class methods were added to write material definitions in MCNP
-and ALARA \cite{wilson_alara:_1999} input file formats.  These materials
+and ALARA \cite{wilson_alara:_1999} input file formats.  These material
 definitions are prepended by comments containing the aforementioned metadata. 
 
 In addition, a function was added to \texttt{pyne.mcnp} to read MCNP input files and
@@ -132,8 +132,8 @@ function can parse formatted comments in MCNP input files in order to
 populate the metadata fields of each \texttt{Material} object.
 
 Moreover a new class called \texttt{pyne.material.MultiMaterial} was added.  This
-represents collections of materials with along with corresponding mass or
-volume fraction.  Class methods allow for mixing of these collections by mass
+represents collections of materials along with corresponding mass or
+volume fractions.  Class methods allow for mixing of these collections by mass
 or volume fraction in order to create \texttt{ Material} objects.
 
 \subsection{MCNP Support}
