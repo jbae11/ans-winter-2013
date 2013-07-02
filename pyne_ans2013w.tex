@@ -215,7 +215,8 @@ However, this does not leverage the known width of ENDF or the known position of
 the non-digit characters.  Hence a C++ function named \texttt{endftod()} was 
 created which takes advantage of this \emph{a priori} information.  
 Table \ref{endftod} compares the average runtimes. The custom algorithm is nearly 
-five times faster on the most-called routine when parsing ENDF files.
+five times faster on the most-called routine when parsing ENDF files.  
+The implementation of this algorithm may be seen in Listing \ref{endftodlisting}.
 
 \begin{table}
 \centering
@@ -234,6 +235,72 @@ PyNE, \texttt{endftod()} & 114 & 4.7 \\
 }
 \end{table}
 
+
+\begin{lstlisting}[language=C++,basicstyle=\scriptsize\ttfamily,frame=single,caption=ENDF to Float Implementation,label=endftodlisting]
+double pyne::endftod (char * s) {
+  // Converts string from ENDF to float64.
+  int pos, mant, exp;
+  double v, dbl_exp;
+  mant = exp = 0;
+  if (s[2] == '.') {
+    // Convert an ENDF float
+    if (s[9] == '+' or s[9] == '-') {
+      // All these factors of ten are from place values.
+      mant = s[8] + 10 * s[7] + 100 * s[6] + 1000 * s[5] \
+        + 10000 * s[4] + 100000 * s[3] + 1000000 * s[1] \
+        - 1111111 * '0';
+      exp = s[10] - '0';
+      // Make the right power of 10.
+      dbl_exp = (exp & 01? 10.: 1) * \
+                ((exp >>= 1) & 01? 100.: 1) * \
+                ((exp >>= 1) & 01? 1.0e4: 1) * \
+                ((exp >>= 1) & 01? 1.0e8: 1);
+      // Adjust for powers of ten from treating mantissa 
+      // as an integer.
+      dbl_exp = (s[9] == '-'? 1/dbl_exp: dbl_exp) * 1.0e-6;
+      // Get mantissa sign, apply exponent.
+      v = mant * (s[0] == '-'? -1: 1) * dbl_exp;
+    }
+    else {
+      mant = s[7] + 10 * s[6] + 100 * s[5] + 1000 * s[4] \
+        + 10000 * s[3] + 100000 * s[1] - 111111 * '0';
+      exp = s[10] + 10 * s[9] - 11 * '0';
+      dbl_exp = (exp & 01? 10.: 1) * \
+                ((exp >>= 1) & 01? 100.: 1) * \
+                ((exp >>= 1) & 01? 1.0e4: 1) * \
+                ((exp >>= 1) & 01? 1.0e8: 1) * \
+                ((exp >>= 1) & 01? 1.0e16: 1) * \
+                ((exp >>= 1) & 01? 1.0e32: 1) * \
+                ((exp >>= 1) & 01? 1.0e64: 1);
+      dbl_exp = (s[8] == '-'? 1/dbl_exp: dbl_exp) * 1.0e-5;
+      v = mant * (s[0] == '-'? -1: 1) * dbl_exp;
+    }
+  }
+  // Convert an ENDF int to float; we start from the last 
+  // char in the field and move forward until we hit a 
+  // non-digit.
+  else {
+    v = 0;
+    mant = 1; 
+    pos = 10;
+    while (s[pos] != '-' and s[pos] != '+' and \
+           s[pos] != ' ' and pos > 0) {
+      v += mant * (s[pos] - '0');
+      mant *= 10;
+      pos--;
+    }
+    v *= (s[pos] == '-'? -1: 1);
+  }
+  return v;
+}
+\end{lstlisting}
+
+As an example of the ENDF reader usage, the following code in Listing \ref{endfapi} 
+displays the top-level interface required to load a data set.  Figure \ref{u235} 
+then displays the data garnered in this way.  This reader has also
+been exposed as a cross section data source available in the \texttt{pyne.xs} 
+sub-package.
+
 \begin{lstlisting}[language=Python,basicstyle=\scriptsize\ttfamily,frame=single,caption=ENDF Reader API,label=endfapi]
 from pyne.endf import Library
 u235 = Library("U235-VII.txt")
@@ -247,12 +314,6 @@ xs_data = u235.get_xs(922350, 16)[0]
   \label{u235}
 \end{figure}
 
-As an example of the ENDF reader usage, the following code in Listing \ref{endfapi} 
-displays the top-level interface required to load a data set.  Figure \ref{u235} 
-then displays the data garnered in this way.  This reader has also
-been exposed as a cross section data source available in the \texttt{pyne.xs} 
-sub-package.
-
 
 \section{Conclusions and Future Work}
 \label{sec:conc}
@@ -263,6 +324,13 @@ to interfacing with external tools.  Both ENDF and MCNP are keystones of
 nuclear engineering software development.  The PyNE project will continue to create 
 free and open source tools that easily interface the plethora of choices available 
 in nuclear engineering and scientific computing. 
+
+\section{Acknowledgements}
+\label{sec:ack}
+
+The authors would like to thank all PyNE contributors for helping make this project 
+possible.  In specific, Dr. Paul Romano deserves further gratidude for his 
+continued support.
 
 \bibliographystyle{ans}
 \bibliography{refs}
