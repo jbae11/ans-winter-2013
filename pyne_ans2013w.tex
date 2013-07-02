@@ -1,36 +1,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  This is a sample LaTeX input file for your contribution to 
-%  the MC2013 conference. Modified by R.C. Martineau at INL from A. 
-%  Sood at LANL, from J. Wagner ORNL who obtained the original class 
-%  file by Jim Warsa, LANL, 16 July 2002}
-%
-%  Please use it as a template for your full paper 
-%    Accompanying/related file(s) include: 
-%       1. Document class/format file: mc2013.cls
-%       2. Sample Postscript Figure:   figure.eps
-%       3. A PDF file showing the desired appearance: template.pdf 
-%    Direct questions about these files to: richard.martinea@inl.gov
-%
-%    Notes: 
-%      (1) You can use the "dvips" utility to convert .dvi 
-%          files to PostScript.  Then, use either Acrobat 
-%          Distiller or "ps2pdf" to convert to PDF format. 
-%      (2) Different versions of LaTeX have been observed to 
-%          shift the page down, causing improper margins.
-%          If this occurs, adjust the "topmargin" value in the
-%          mc2013.cls file to achieve the proper margins. 
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass{ansconf}
+\documentclass{anstrans}
 %
 %  various packages that you may wish to activate for usage 
 \usepackage{graphicx}
 \usepackage{tabls}
 \usepackage{hyperref}
+\hypersetup{breaklinks=true, linkcolor=black, citecolor=black,
+  urlcolor=black, colorlinks=true, pdftitle={PyNE Progress Report}}
 \usepackage{listings}
 %
 
@@ -57,15 +33,17 @@
 
 
 
+\title{PyNE Progress Report}
 
-% Insert authors' names and short version of title in lines below
-%
-\authorHead{Scopatz, et al.}
-\shortTitle{PyNE Progress Report}
+\author{Anthony~Scopatz$^1$, Elliott~D.~Biondo$^1$, 
+        Carsten Brachem$^2$, John Xia$^3$, 
+        Paul P. H. Wilson$^1$}
 
-\confTitle{PyNE Progress Report}
-\confLocation{Washington D.C., Nov. 11-14, 2013}
-\confPublished{on CD-ROM (2013)}
+\institute{$^1$ The University of Wisconsin-Madison, 1415 Engineering Drive, Madison, WI 53706, USA \\
+  $^2$ Technische Universit\"at Dresden, Helmholtzstr. 10 01069 Dresden, Germany\\
+  $^3$ The University of Chicago, 5747 S. Ellis Ave, Jones 311, Chicago, IL  60637}
+\email{scopatz@wisc.edu}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -74,32 +52,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
-\title{PyNE Progress Report}
 
-\author{Anthony Scopatz\superscript{A}, Elliott D. Biondo\superscript{A}, 
-        Carsten Brachem\superscript{B}, John Xia\superscript{C}, 
-        Paul P. H. Wilson\superscript{A}}
-\affil{\textbf{A:} The University of Wisconsin-Madison, 1415 Engineering Drive, Madison, WI 53706, USA \\
-       \textbf{B:} Technische Universit\"at Dresden, Helmholtzstr. 10 01069 Dresden, Germany\\
-       \textbf{C:} The University of Chicago, 5747 S. Ellis Ave, Jones 311, Chicago, IL  60637\\
-       \emph{email:} scopatz@wisc.edu}
-
-\maketitle
-
-\begin{abstract}
-%\raggedright
-
-PyNE, the nuclear engineering toolkit, has recently received several major
-feature additions.  These include support for reading and writing PyNE materials 
-as ALARA materials.  Additionally, MOAB has been selected as the PyNE mesh package
-and MCNP WWINP and MESHTAL file handlers are available.  Furthermore, MCNP PTRAC files may now
-easily be converted to an HDF5 file.  Lastly, an ENDF reader has been written and 
-optimized.
-
-\emph{Key Words}: PyNE, MCNP, ENDF
-\end{abstract}
-
-\setlength{\baselineskip}{11pt}
+% \begin{abstract}
+% %\raggedright
+% 
+% PyNE, the nuclear engineering toolkit, has recently received several major
+% feature additions.  These include support for reading and writing PyNE materials 
+% as ALARA materials.  Additionally, MOAB has been selected as the PyNE mesh package
+% and MCNP MESHTAL file handlers are available.  Furthermore, MCNP PTRAC files may now
+% easily be converted to an HDF5 file.  Lastly, an ENDF reader has been written and 
+% optimized.
+% 
+% \emph{Key Words}: PyNE, MCNP, ENDF
+% \end{abstract}
+% 
+% \setlength{\baselineskip}{11pt}
 
 
 \section{Introduction}
@@ -194,7 +161,7 @@ for the common use case. Listing \ref{fig_ptractohdf5} shows the usage
 description of the conversion program.
 
 \begin{figure*}[htbp]
-\begin{lstlisting}[frame=single,basicstyle=\scriptsize,label=fig_ptractohdf5,caption=Usage description of the PTRAC to HDF5 command line utility.]
+\begin{lstlisting}[frame=single,basicstyle=\scriptsize\ttfamily,label=fig_ptractohdf5,caption=Usage description of the PTRAC to HDF5 command line utility.]
 usage: ptrac_to_hdf5 [-h] [-n TABLE_NAME] [-t TABLE_TITLE] [-s] ptrac_file hdf5_file
 
 write the contents of a MCNP PTRAC file to a HDF5 table
@@ -216,7 +183,7 @@ optional arguments:
 \subsection{ENDF Reader Support}
 
 A significant improvement to the PyNE toolkit has been the development of 
-a fully fledged ENDF \cite{mclane2001endf} reader.  This parser is capable 
+a fully fledged ENDF \cite{herman2009endf} reader.  This parser is capable 
 of handling all ENDF files and evaluations. The performance of the reader is 
 extraordinarily fast due to a number of innovative optimizations.
 
@@ -250,10 +217,11 @@ created which takes advantage of this \emph{a priori} information.
 Table \ref{endftod} compares the average runtimes. The custom algorithm is nearly 
 five times faster on the most-called routine when parsing ENDF files.
 
-\begin{table*}
+\begin{table}
+\centering
 \caption{ENDF Float Conversion Comparison}
 \label{endftod}
-\begin{center}
+{\small
 \begin{tabular}[htbp]{|l|c|c|}
 \hline
 \textbf{Implementation} & \textbf{Average Run Time [ns]} & \textbf{Speed Up} \\
@@ -265,22 +233,21 @@ Na\"{i}ve C, \texttt{atof()} & 229 & 2.3 \\
 PyNE, \texttt{endftod()} & 114 & 4.7 \\
 \hline
 \end{tabular}
-\end{center}
-\end{table*}
+}
+\end{table}
 
-\begin{lstlisting}[language=Python,basicstyle=\scriptsize,frame=single,caption=ENDF Reader API,label=endfapi]
+\begin{lstlisting}[language=Python,basicstyle=\scriptsize\ttfamily,frame=single,caption=ENDF Reader API,label=endfapi]
 from pyne.endf import Library
 u235 = Library("U235-VII.txt")
 xs_data = u235.get_xs(922350, 16)[0]
 \end{lstlisting}
 
-\begin{figure*}[htbp]
-\begin{center}
-\includegraphics[scale=1.0]{u235_2n.eps}
-\end{center}
-\caption{U-235 (n, 2n) Cross Section from ENDF Evaluation}
-\label{u235}
-\end{figure*}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.5\textwidth]{u235_2n.eps}
+  \caption{U-235 (n, 2n) Cross Section from ENDF Evaluation}
+  \label{u235}
+\end{figure}
 
 As an example of the ENDF reader usage, the following code in Listing \ref{endfapi} 
 displays the top-level interface required to load a data set.  Figure \ref{u235} 
