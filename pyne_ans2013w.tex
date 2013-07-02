@@ -8,6 +8,7 @@
 \hypersetup{breaklinks=true, linkcolor=black, citecolor=black,
   urlcolor=black, colorlinks=true, pdftitle={PyNE Progress Report}}
 \usepackage{listings}
+\usepackage{booktabs}
 %
 
 %General Short-Cut Commands
@@ -87,7 +88,7 @@ file format.
 
 Improvements to material handling have been added to the \texttt{pyne.material}
 and \texttt{pyne.mcnp} modules. A new attribute was added to the
-\texttt{pyne.material.Material} class in order to store material metadata (e.g.
+\texttt{pyne.material.Material} class in order to store material metadata (e.g.,
 material name, the source of the material definition, comments).
 \texttt{Material} class methods were added to write material definitions in MCNP
 and ALARA \cite{wilson_alara:_1999} input file formats.  These material
@@ -128,7 +129,7 @@ bounds for neutrons, photons, or both. The weight window lower bounds are
 stored on a structured MOAB mesh attribute. In addition to class methods that
 read-in and write-out MCNP WWINP files, \texttt{Wwinp} objects can be created
 directly from MOAB meshes tagged with weight window lower bounds. This will
-facilitate the future implementation of weight window generation schemes (e.g.
+facilitate the future implementation of weight window generation schemes (e.g.,
 MAGIC \cite{davis_comparison_2011}, CADIS \cite{haghighat_monte_2003}) within
 PyNE.
 
@@ -137,7 +138,7 @@ Cartesian MCNP MESHTAL file. These files may contain multiple neutron and/or
 photon mesh
 tallies.  Tally results and relative errors are stored on structured MOAB
 meshes. A dictionary attribute allows key-value access to these meshes using
-tally numbers (i.e. 4, 14, 24, ...) as keys. Other methods allow for the
+tally numbers (i.e., 4, 14, 24, ...) as keys. Other methods allow for the
 addition and subtraction of tally values for different mesh tallies.
 
 Another addition to PyNE's MCNP capabilities is the ability to read and
@@ -222,16 +223,14 @@ five times faster on the most-called routine when parsing ENDF files.
 \caption{ENDF Float Conversion Comparison}
 \label{endftod}
 {\small
-\begin{tabular}[htbp]{|l|c|c|}
-\hline
+\begin{tabular}[htbp]{lcc}
+\toprule
 \textbf{Implementation} & \textbf{Average Run Time [ns]} & \textbf{Speed Up} \\
-\hline
+\midrule
 Na\"{i}ve Python, \texttt{float()} & 539 & 1.0 \\
-\hline
 Na\"{i}ve C, \texttt{atof()} & 229 & 2.3 \\
-\hline
 PyNE, \texttt{endftod()} & 114 & 4.7 \\
-\hline
+\bottomrule
 \end{tabular}
 }
 \end{table}
