@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210.55142"
+   height="31.552778"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="endf_nums.svg">
+  <defs
+     id="defs4">
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lstart"
+       style="overflow:visible">
+      <path
+         id="path3797"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.2657239"
+     inkscape:cx="-2.7389779"
+     inkscape:cy="-30.238024"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1438"
+     inkscape:window-height="868"
+     inkscape:window-x="0"
+     inkscape:window-y="30"
+     inkscape:window-maximized="0"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-103.49809,-43.453392)">
+    <rect
+       style="fill:#ff0066;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect4245-7"
+       width="34.762714"
+       height="30.022345"
+       x="279.2868"
+       y="43.4534"
+       rx="14.806342"
+       ry="3.9503086" />
+    <rect
+       style="fill:#cd87de;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect4245-0"
+       width="21.331665"
+       height="30.022345"
+       x="258.32535"
+       y="44.243446"
+       rx="9.0857096"
+       ry="3.9503086" />
+    <rect
+       style="fill:#5fd3bc;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect4245-9"
+       width="96.387527"
+       height="30.022345"
+       x="163.14775"
+       y="43.453396"
+       rx="41.053947"
+       ry="3.9503086" />
+    <rect
+       style="fill:#2aff80;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect4245-6"
+       width="21.331665"
+       height="30.022345"
+       x="142.60614"
+       y="43.453392"
+       rx="9.0857096"
+       ry="3.9503086" />
+    <rect
+       style="fill:#d4ff2a;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect4245-1"
+       width="21.331665"
+       height="30.022345"
+       x="124.01485"
+       y="43.823578"
+       rx="9.0857096"
+       ry="3.9503086" />
+    <rect
+       style="fill:#ff9955;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect4245"
+       width="21.331665"
+       height="30.022345"
+       x="103.49809"
+       y="44.983826"
+       rx="9.0857096"
+       ry="3.9503086" />
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSerif;-inkscape-font-specification:FreeSerif"
+       x="210.15642"
+       y="69.525429"
+       id="text2985"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2987"
+         x="210.15642"
+         y="69.525429"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:FreeMono;-inkscape-font-specification:FreeMono">-3.28559+12</tspan></text>
+  </g>
+</svg>

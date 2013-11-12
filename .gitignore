@@ -6,3 +6,5 @@
 *.out
 *.pdf
 UniformGridData.yt
+pres/U235-VII.txt
+*.pyc
